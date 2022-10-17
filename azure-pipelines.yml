@@ -13,6 +13,7 @@ steps:
 - task: NodeTool@0
   inputs:
     versionSpec: '14.x'
+    checkLatest: true
   displayName: 'Install Node.js'
 
 - script:  |
@@ -20,9 +21,11 @@ steps:
     git config --global user.email "657225485@qq.com";
     git config --global user.name "www778878net";
     npm install;
-    npm run build;
-    
-    
+    npm run build;  
   displayName: 'npm install and build'
 
- 
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'npm version patch'
