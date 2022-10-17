@@ -28,7 +28,7 @@
     "postpublish": "git push origin --all && git push origin --tags",
     "postversion": "npm publish --access public",
     "preversion": "npm test ",
-    "test": "tsc   && mocha --config c:\\test7788\\test\\localtest.json   --reporter spec  -t 5000  --exit",
+    "test": "tsc   && mocha     --reporter spec  -t 5000  --exit",
     "build": "tsc  "
   },
   "engines": {
