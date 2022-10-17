@@ -24,3 +24,10 @@ steps:
     
     
   displayName: 'npm install and build'
+
+- script:  |
+    
+    npm version patch;
+    
+    
+  displayName: 'npm publish'
