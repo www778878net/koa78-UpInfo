@@ -21,6 +21,6 @@ steps:
     git config --global user.name "www778878net";
     npm install;
     npm run build;
-    npm version patch;
+    
     
   displayName: 'npm install and build'
