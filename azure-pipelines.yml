@@ -15,9 +15,19 @@ steps:
     versionSpec: '14.x'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-    npm version patch
-
+- script:  |
+    
+    git config --global user.email "657225485@qq.com";
+    git config --global user.name "www778878net";
+    npm install;
+    npm run build;
+    
+    
   displayName: 'npm install and build'
+
+- script:  |
+    
+    npm version patch;
+    
+    
+  displayName: 'npm publish'
