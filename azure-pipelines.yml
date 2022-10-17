@@ -15,7 +15,8 @@ steps:
     versionSpec: '14.x'
   displayName: 'Install Node.js'
 
-- script: |
+- script:  
+    npm publish --access public
     git config --global user.email "657225485@qq.com"
     git config --global user.name "www778878net"
     npm install
