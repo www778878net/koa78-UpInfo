@@ -1,5 +1,5 @@
 {
-  "name": "@www778878net/koa78-upinfo",
+  "name": "@www778878net\/koa78-upinfo",
   "version": "0.0.2",
   "description": "nodejs koa78封装 上传类",
   "main": "dist/index.js",
