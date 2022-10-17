@@ -7,13 +7,13 @@ class UpInfo {
     //redis: Redis78
     constructor(ctx) {
         //数据获取非必填字段
-        this.getstart = 0;
-        this.getnumber = 15;
-        this.order = "idpk";
-        this.bcid = "";
-        this.mid = "";
-        this.pars = [];
-        this.cols = [];
+        this.getstart = 0; //分页起始
+        this.getnumber = 15; //单页数量
+        this.order = "idpk"; //排序
+        this.bcid = ""; //saas访问服务方数据
+        this.mid = ""; //修改 行id
+        this.pars = []; //上传参数
+        this.cols = []; //上传 相关 列数组
         this.jsonbase64 = true; //JSON化后再BASE64
         this.jsonp = false; //是否跨域访问
         this.upid = ""; //请求号
@@ -36,13 +36,13 @@ class UpInfo {
         //上传临时存 验证后再用
         this.cidn = ""; //未验证的cid
         this.parsn = ""; //未验证的cid
-        this.colsn = "";
+        this.colsn = ""; //未验证的cols
         //需数据库读取验证
-        this.sid = "";
+        this.sid = ""; //会话ID
         this.cid = ""; //先存临时验证后转 防忘记
-        this.uid = "";
-        this.coname = '测试帐套';
-        this.uname = "";
+        this.uid = ""; //用户ID
+        this.coname = '测试帐套'; //帐套名
+        this.uname = ""; //用户名
         this.pwd = ""; //不限制多地登录的场合
         this.weixin = ""; //需要权限的要绑定微信
         this.idceo = ""; //管理员UID 有些只能帐套管理员操作的
@@ -138,6 +138,10 @@ class UpInfo {
             }
         }
     }
+    /**
+     * 如果是文件日志或数据库或日志服务 请重写此方法
+     * @param info
+     */
     log(info) {
         console.log(info);
     }
@@ -182,6 +186,10 @@ class UpInfo {
         }
         return false;
     }
+    /**
+     * 检查上传的列是否符合表定义 防注入
+     * @param cols
+     */
     checkCols(cols) {
         if (this.cols.length === 1 && (this.cols[0] === 'all' || this.cols[0] === 'idpk')) {
             return "checkcolsallok";
@@ -200,6 +208,10 @@ class UpInfo {
         return isback;
     }
     ;
+    /**
+     * 检查上传的排序是否符合表定义 防注入
+     * @param cols
+     */
     inOrder(cols) {
         var isin = true;
         var orders = this.order.split(",");
