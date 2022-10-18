@@ -24,8 +24,7 @@ steps:
     npm run build;  
   displayName: 'npm install and build'
 
-
-- task: PowerShell@2
+- task: Npm@1
   inputs:
-    targetType: 'inline'
-    script: 'npm version patch'
+    command: 'publish'
+    publishEndpoint: 'npm'
