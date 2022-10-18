@@ -33,9 +33,8 @@ steps:
     command: 'publish'
     publishEndpoint: 'npm'
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Host "git push"  
-      git push origin --all && git push origin --tags
+- script:  |
+    
+    git push origin --all && git push origin --tags
+  displayName: 'git push'
+ 
