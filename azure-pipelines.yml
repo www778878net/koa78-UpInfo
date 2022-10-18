@@ -39,7 +39,8 @@ steps:
       $Minutes=$interval.Minutes
       
       Write-Host "##vso[task.setvariable variable=buildNumber]0.0.$days.$Minutes"
-      npm version ${env:BUILDNUMBER}
+      Write-Host ${env:buildNumber}
+      npm version ${env:buildNumber}
 - task: Npm@1
   inputs:
     command: 'publish'
