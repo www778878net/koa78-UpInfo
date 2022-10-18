@@ -24,17 +24,8 @@ steps:
     git config --global user.name "www778878net";
     npm install;
     npm run build;  
-    npm version patch;
-  displayName: 'npm install and build'
+    npm test;
+  displayName: 'npm install and build and test'
 
  
-- task: Npm@1
-  inputs:
-    command: 'publish'
-    publishEndpoint: 'npm'
-
-- script:  |
-    
-    git push origin --all && git push origin --tags
-  displayName: 'git push'
  
