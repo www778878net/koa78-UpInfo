@@ -34,7 +34,8 @@ steps:
     publishEndpoint: 'npm'
 
 - script:  |
-    
+    git config --global user.email "657225485@qq.com";
+    git config --global user.name "www778878net";
     git push origin --all && git push origin --tags
   displayName: 'git push'
  
