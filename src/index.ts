@@ -102,7 +102,7 @@ export default class UpInfo {
         this.uname = req.header['uname'] || pars["uname"] || 'guest';
         this.pwd = req.header['pwd'] || pars["pwd"] || '';//不限制多地登录
         this.sid = req.header['sid'] || pars["sid"] || '';
-        this.mid = pars["mid"] || this.getNewid();
+        this.mid = pars["mid"] || this.upid;
         this.midpk = pars["midpk"] || -1;
         this.getnumber = +pars["getnumber"] || 15;
         this.pcid = req.header['pcid'] || pars["pcid"] || '';//机器码
