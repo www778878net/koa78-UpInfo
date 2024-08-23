@@ -46,7 +46,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "dayjs": "^1.11.5"
+    "dayjs": "^1.11.13"
   },
   "bundleDependencies": []
 }
