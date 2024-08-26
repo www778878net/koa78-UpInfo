@@ -1,0 +1,94 @@
+name: Build, Test, and Publish
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          ref: develop
+          fetch-depth: 0 # Get full history for tags and branches
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Tests
+        run: npm test
+
+  auto-merge:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          ref: develop
+          fetch-depth: 0 # Get full history for tags and branches
+
+      - name: Fetch main branch and check for new tags
+        id: check-main-and-tags
+        run: |
+          git fetch origin main
+          NEW_COMMITS=$(git rev-list --count origin/main..develop)
+          echo "NEW_COMMITS:$NEW_COMMITS"
+          echo "NEW_COMMITS=$NEW_COMMITS" >> $GITHUB_OUTPUT
+
+          # Check for new tags
+          NEW_TAGS=$(git ls-remote --tags origin | awk '{print $2}' | wc -l)
+          echo "NEW_TAGS:$NEW_TAGS"
+          echo "NEW_TAGS=$NEW_TAGS" >> $GITHUB_OUTPUT
+
+          # Print logs
+          echo "Fetching main branch completed."
+          echo "Checking for new tags completed."
+
+      - name: Merge develop into main with squash
+        if: steps.check-main-and-tags.outputs.NEW_TAGS != '0'
+        run: |
+          git config --global user.email "657225485@qq.com"
+          git config --global user.name "Frieda.Hu<657225485@qq.com>"
+          git checkout main
+          git merge develop --squash
+          # Get the second-to-last commit message and remove line breaks
+          SECOND_TO_LAST_COMMIT_MESSAGE=$(git log --pretty=format:'%B' -n 2 develop | tail -n +2 | tr -d '\n')
+          git commit -m "$SECOND_TO_LAST_COMMIT_MESSAGE"
+          git push origin main
+
+          # Print logs
+          echo "Merging develop into main with squash completed."
+          echo "Commit message used: $SECOND_TO_LAST_COMMIT_MESSAGE"
+
+  publish:
+    needs: [test, auto-merge]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          fetch-depth: 0 # Get full history for tags and branches
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
