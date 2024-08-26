@@ -1,6 +1,6 @@
 {
   "name": "@www778878net/koa78-upinfo",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "nodejs koa78封装 上传类",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -29,7 +29,8 @@
     "postversion": "npm publish --access public",
     "preversion": "npm test ",
     "test": "tsc   && mocha     --reporter spec  -t 5000  --exit",
-    "build": "tsc  "
+    "build": "tsc  ",
+    "main": "git checkout main && git pull origin main && git merge develop --squash --no-commit"
   },
   "engines": {
     "node": ">=14.0.0"
