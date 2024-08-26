@@ -29,7 +29,8 @@
     "postversion": "npm publish --access public",
     "preversion": "npm test ",
     "test": "tsc   && mocha     --reporter spec  -t 5000  --exit",
-    "build": "tsc  "
+    "build": "tsc  ",
+    "main": "git checkout main && git pull origin main && git merge develop --squash --no-commit"
   },
   "engines": {
     "node": ">=14.0.0"
