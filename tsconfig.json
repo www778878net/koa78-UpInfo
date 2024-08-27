@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "lib": [ "ES2015", "DOM" ],
+    "target": "esnext",
     "module": "commonjs",
-    "rootDir": "src",
-    "outDir": "dist",
-    "strictNullChecks": true,
+    "lib": ["esnext", "dom"],
+    "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "noImplicitAny": false,
-    "sourceMap": true,
-    "strict": true
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": ".",
+    "outDir": "dist"
   },
- 
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
+  "ts-jest": {
+    "tsConfig": "tsconfig.json",
+    "useESM": true
+  }
 }
