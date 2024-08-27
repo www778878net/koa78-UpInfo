@@ -1,6 +1,6 @@
 {
   "name": "koa78-upinfo",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "nodejs koa78封装 上传类",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
