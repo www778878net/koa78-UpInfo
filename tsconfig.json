@@ -7,12 +7,12 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "rootDir": ".",
-    "outDir": "dist",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "declaration": true
   },
-  "include": ["src/**/*", "test/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"],
   "ts-jest": {
     "tsConfig": "tsconfig.json",
     "useESM": true
