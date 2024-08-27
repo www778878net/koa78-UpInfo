@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "nodejs koa78封装 上传类",
   "main": "dist/index.js",
-  "types": "src/index.ts",
+  "types": "dist/index.d.ts",
   "author": {
     "name": "Frieda.Hu<657225485@qq.com>"
   },
