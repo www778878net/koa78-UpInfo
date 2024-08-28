@@ -112,7 +112,7 @@ export default class UpInfo {
         this.sid = req.header['sid'] ?? pars.sid ?? ''; 
         this.sid ??= "";
      
-        this.mid = pars.mid ?? this.getNewid();
+        this.mid = pars.mid ?? UpInfo.getNewid();
         this.midpk = pars.midpk ?? -1;
         this.getnumber = +(pars.getnumber ?? 15);  
         this.pcid = req.header['pcid'] ?? pars.pcid ?? '';
@@ -126,7 +126,7 @@ export default class UpInfo {
    
         this.jsonp = pars.jsonp ?? false;
         this.backtype = pars.backtype ?? "json";
-        this.upid = pars.upid ?? this.getNewid();
+        this.upid = pars.upid ?? UpInfo.getNewid();
         this.cache = req.header['cache'] ?? pars.cache ?? this.mid;
       
         this.cols = typeof this.colsn === 'string' ? JSON.parse(this.colsn) : this.colsn;
@@ -196,7 +196,7 @@ export default class UpInfo {
     }
 
     
-    getMaster(): UpInfo {
+    static getMaster(): UpInfo {
         const up2 = new UpInfo(null);
         Object.assign(up2, {
             sid: 'ba',      
@@ -211,7 +211,7 @@ export default class UpInfo {
         return up2;
     };
 
-    getGuest(): UpInfo {
+    static getGuest(): UpInfo {
         const up2 = new UpInfo(null);
         Object.assign(up2, {
             sid: 'GUEST888-8888-8888-8888-GUEST88GUEST',
@@ -226,7 +226,7 @@ export default class UpInfo {
         return up2;
     };
 
-    getNewid(): string {
+    static getNewid(): string {
         const s4 = (): string => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
         return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
     }
