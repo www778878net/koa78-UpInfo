@@ -14,7 +14,7 @@ echo "TypeScript compilation completed"
 
 # Check if TSC was successful
 if [ $? -ne 0 ]; then
-    echo "TypeScript compilation failed, commit aborted"
+    echo "TypeScript compilation failed, commit aborted "
     exit 1
 fi
 
