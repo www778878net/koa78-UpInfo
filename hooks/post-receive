@@ -1,9 +1,15 @@
 #!/bin/sh
 
+# Log to ensure the script is being executed
+echo "post-receive hook script started"
+
 # Read the ref and branch name from stdin
 while read oldrev newrev ref
 do
     branch=$(echo $ref | cut -d/ -f3)
+    
+    # Log the branch name
+    echo "Branch: $branch"
     
     # If on the develop branch, run npm script
     if [ "$branch" = "develop" ]; then
@@ -16,5 +22,7 @@ do
         else
             echo "npm script finished successfully"
         fi
+    else
+        echo "Not on develop branch, skipping npm script"
     fi
 done
