@@ -11,6 +11,10 @@ do
         cd "$(git rev-parse --show-toplevel)"
         echo "Current directory: $(pwd)"
         npm run main
-        echo "npm script finished with exit code $?"
+        if [ $? -ne 0 ]; then
+            echo "npm script failed with exit code $?"
+        else
+            echo "npm script finished successfully"
+        fi
     fi
 done
