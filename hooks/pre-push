@@ -17,6 +17,6 @@ cd "$(git rev-parse --show-toplevel)"
 
 # Upload files to Alibaba Cloud OSS
 echo "prepare_upload.bat start ..."
-cmd.exe /c prepare_upload.bat
+cmd.exe /c "$(git rev-parse --show-toplevel)/hooks/prepare_push.bat"
 
 echo "pre-push hook execution completed"
