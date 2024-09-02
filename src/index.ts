@@ -183,7 +183,7 @@ export default class UpInfo {
       } else if (Array.isArray(this.parsn)) {
         this.pars = this.parsn.map(p => this._decodeBase64(p));
       } else {
-        console.log('无效的 parsn 类型');
+        console.log('error parsn kind');
         this.pars = [];
       }
     }
