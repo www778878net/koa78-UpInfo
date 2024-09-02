@@ -19,4 +19,12 @@ if exist ".git\hooks\pre-push" (
     echo err: pre-push error
 )
 
+echo Copying post-receive hook...
+copy /Y "hooks\post-receive" ".git\hooks\post-receive"
+if exist ".git\hooks\post-receive" (
+    echo post-receive ok
+) else (
+    echo err: post-receive error
+)
+
 echo Git hooks setup completed
