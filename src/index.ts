@@ -121,7 +121,7 @@ export default class UpInfo {
         this.ip = this.ip.includes("ffff") ? this.ip.substring(this.ip.indexOf("ffff") + 5) : this.ip;
         this.colsn = pars["cols[]"] ?? pars.cols ?? ["all"];  
            
-        this.order = pars.order ?? 'idpk';
+        this.order = pars.order ?? 'idpk desc';
     
    
         this.jsonp = pars.jsonp ?? false;
