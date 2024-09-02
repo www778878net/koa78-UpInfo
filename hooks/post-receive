@@ -7,7 +7,7 @@ do
     
     # If on the develop branch, run npm script
     if [ "$branch" = "develop" ]; then
-        echo "On develop branch, running npm script..."
+        echo "On develop branch, running npm  script..."
         cd "$(git rev-parse --show-toplevel)"
         npm run main
     fi
