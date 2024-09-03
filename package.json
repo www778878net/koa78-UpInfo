@@ -24,7 +24,7 @@
     "nodejs"
   ],
   "scripts": {
-    "dev": "git checkout develop && git merge main && git push origin develop",
+    "dev": "git checkout develop && git merge main",
     "main": "git checkout main && git pull origin main && git merge develop --strategy-option theirs --no-edit && LAST_COMMIT_MSG=$(git log -1 --pretty=%B) && git commit --amend -m \"$LAST_COMMIT_MSG\" && git push origin main",
     "build": "tsc",
     "test": "npm run build && npx jest",
@@ -34,7 +34,10 @@
     "postversion": "git push --follow-tags && git checkout develop && git merge main && git push origin develop",
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
-    "version:major": "npm version major"
+    "version:major": "npm version major",
+    "precommit": "node hooks/pre-commit.js",
+    "prepush": "node hooks/pre-push.js",
+    "hooks": "node hooks/install-hooks.js"
   },
   "engines": {
     "node": ">=14.0.0"
