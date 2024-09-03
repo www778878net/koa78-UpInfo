@@ -25,7 +25,7 @@
   ],
   "scripts": {
     "dev": "git checkout develop && git merge main",
-    "main": "git checkout main && git pull origin main && git merge develop --strategy-option theirs --no-edit && LAST_COMMIT_MSG=$(git log -1 --pretty=%B) && git commit --amend -m \"$LAST_COMMIT_MSG\" && git push origin main",
+    "main": "node hooks/mergeBranches.js",
     "build": "tsc",
     "test": "npm run build && npx jest",
     "prepublishOnly": "npm run build",
@@ -61,6 +61,7 @@
     "mochawesome": "^4.1.0",
     "nodemon": "^3.1.4",
     "phantom": "^6.3.0",
+    "shelljs": "^0.8.5",
     "supertest": "^4.0.2",
     "ts-jest": "^29.2.5",
     "typescript": "^5.5.4"
