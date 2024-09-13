@@ -74,7 +74,7 @@ export default class UpInfo {
     this.method = req.path;
 
     if (ctx.params) {
-      this.apiver=ctx.params.apiver
+      this.apiver = ctx.params.apiver;
       this.apisys = ctx.params.apisys;
       this.apiobj = ctx.params.apiobj;
       this.apifun = ctx.params.apifun;
@@ -95,8 +95,6 @@ export default class UpInfo {
       this.apiobj = apiobj;
       this.apifun = apifun;
     }
-
-
 
     if (!pars) return;
 
@@ -122,7 +120,6 @@ export default class UpInfo {
     this.colsn = pars["cols[]"] ?? pars.cols ?? ["all"];
 
     this.order = pars.order ?? 'idpk desc';
-
 
     this.jsonp = pars.jsonp ?? false;
     this.backtype = pars.backtype ?? "json";
@@ -188,21 +185,19 @@ export default class UpInfo {
       }
     }
 
-
   }
 
   private _decodeBase64(encodestr: string): string {
     return Buffer.from(encodestr.replace(/\*/g, "+").replace(/-/g, "/").replace(/\./g, "="), 'base64').toString();
   }
 
-
-  private static _masterInstance: UpInfo =this.getGuest() ;
+  private static _masterInstance: UpInfo = this.getGuest();
 
   static setMaster(up: UpInfo): void {
     this._masterInstance = up;
   }
 
-  static getMaster(): UpInfo { 
+  static getMaster(): UpInfo {
     return this._masterInstance;
   };
 
@@ -267,7 +262,11 @@ export default class UpInfo {
     return isin;
   };
 
+  clone(): UpInfo {
+    const clonedUpInfo = new UpInfo(null);
+    clonedUpInfo.sid = this.sid;
+    clonedUpInfo.uname = this.uname;
+    clonedUpInfo.bcid = this.bcid;
+    return clonedUpInfo;
+  }
 }
-
-
-

@@ -124,4 +124,19 @@ describe('UpInfo', () => {
     
     console.log('测试完成');
   });
+
+  it('应正确克隆 UpInfo 对象', () => {
+    const originalUpInfo = new UpInfo(null);
+    originalUpInfo.sid = 'test-sid';
+    originalUpInfo.uname = 'test-user';
+    originalUpInfo.bcid = 'test-bcid';
+    originalUpInfo.v = 25;  // 这个属性不应被克隆
+
+    const clonedUpInfo = originalUpInfo.clone();
+
+    expect(clonedUpInfo.sid).toBe('test-sid');
+    expect(clonedUpInfo.uname).toBe('test-user');
+    expect(clonedUpInfo.bcid).toBe('test-bcid');
+    expect(clonedUpInfo.v).toBe(24);  // 应该是默认值,而不是原始对象的值
+  });
 });
