@@ -103,7 +103,7 @@ export default class UpInfo {
     this.type = pars.type ?? 0;
 
     this.bcid = pars.bcid ?? "d4856531-e9d3-20f3-4c22-fe3c65fb009c";
-    this.v = req.header['v'] ?? pars.v ?? 24;
+    this.v = +(req.header['v'] ?? pars.v ?? 24);
     this.getstart = +(pars.getstart ?? 0);
     this.parsn = pars["pars[]"] ?? pars.pars ?? "";
     this.source = req.header['source'] ?? pars.source ?? 'no';
