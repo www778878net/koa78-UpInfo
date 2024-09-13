@@ -1,5 +1,4 @@
-﻿
-import dayjs from 'dayjs';
+﻿import dayjs from 'dayjs';
 
 export default class UpInfo {
   // 数据获取非必填字段
@@ -75,7 +74,8 @@ export default class UpInfo {
     this.method = req.path;
 
     if (ctx.params) {
-      this.apisys = ctx.params.msys;
+      this.apiver = ctx.params.apiver;
+      this.apisys = ctx.params.apisys;
       this.apiobj = ctx.params.apiobj;
       this.apifun = ctx.params.apifun;
     }
@@ -88,7 +88,7 @@ export default class UpInfo {
       pars = req.fields ?? req.body;
     } else if (req.method === "SOCK") {
       pars = req.header;
-      this.method = req.header["path"];
+      this.method = req.header["method"];
       const [apiver, apisys, apiobj, apifun] = this.method.split("/");
       this.apiver = apiver;
       this.apisys = apisys;
@@ -96,14 +96,12 @@ export default class UpInfo {
       this.apifun = apifun;
     }
 
-
-
     if (!pars) return;
 
     this.type = pars.type ?? 0;
 
     this.bcid = pars.bcid ?? "d4856531-e9d3-20f3-4c22-fe3c65fb009c";
-    this.v = req.header['v'] ?? pars.v ?? 24;
+    this.v = +(req.header['v'] ?? pars.v ?? 24);
     this.getstart = +(pars.getstart ?? 0);
     this.parsn = pars["pars[]"] ?? pars.pars ?? "";
     this.source = req.header['source'] ?? pars.source ?? 'no';
@@ -122,7 +120,6 @@ export default class UpInfo {
     this.colsn = pars["cols[]"] ?? pars.cols ?? ["all"];
 
     this.order = pars.order ?? 'idpk desc';
-
 
     this.jsonp = pars.jsonp ?? false;
     this.backtype = pars.backtype ?? "json";
@@ -188,27 +185,20 @@ export default class UpInfo {
       }
     }
 
-
   }
 
   private _decodeBase64(encodestr: string): string {
     return Buffer.from(encodestr.replace(/\*/g, "+").replace(/-/g, "/").replace(/\./g, "="), 'base64').toString();
   }
 
+  private static _masterInstance: UpInfo = this.getGuest();
+
+  static setMaster(up: UpInfo): void {
+    this._masterInstance = up;
+  }
 
   static getMaster(): UpInfo {
-    const up2 = new UpInfo(null);
-    Object.assign(up2, {
-      sid: 'ba',
-      cid: 'd4c',
-      bcid: 'd4',
-      mid: this.getNewid(),
-      uname: 'ss',
-      pars: [],
-      getstart: 0,
-      ip: "127.0.0.1"
-    });
-    return up2;
+    return this._masterInstance;
   };
 
   static getGuest(): UpInfo {
@@ -272,7 +262,11 @@ export default class UpInfo {
     return isin;
   };
 
+  clone(): UpInfo {
+    const clonedUpInfo = new UpInfo(null);
+    clonedUpInfo.sid = this.sid;
+    clonedUpInfo.uname = this.uname;
+    clonedUpInfo.bcid = this.bcid;
+    return clonedUpInfo;
+  }
 }
-
-
-
