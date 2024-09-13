@@ -1,5 +1,4 @@
-﻿
-import dayjs from 'dayjs';
+﻿import dayjs from 'dayjs';
 
 export default class UpInfo {
   // 数据获取非必填字段
@@ -75,7 +74,8 @@ export default class UpInfo {
     this.method = req.path;
 
     if (ctx.params) {
-      this.apisys = ctx.params.msys;
+      this.apiver=ctx.params.apiver
+      this.apisys = ctx.params.apisys;
       this.apiobj = ctx.params.apiobj;
       this.apifun = ctx.params.apifun;
     }
@@ -88,7 +88,7 @@ export default class UpInfo {
       pars = req.fields ?? req.body;
     } else if (req.method === "SOCK") {
       pars = req.header;
-      this.method = req.header["path"];
+      this.method = req.header["method"];
       const [apiver, apisys, apiobj, apifun] = this.method.split("/");
       this.apiver = apiver;
       this.apisys = apisys;
@@ -196,19 +196,14 @@ export default class UpInfo {
   }
 
 
-  static getMaster(): UpInfo {
-    const up2 = new UpInfo(null);
-    Object.assign(up2, {
-      sid: 'ba',
-      cid: 'd4c',
-      bcid: 'd4',
-      mid: this.getNewid(),
-      uname: 'ss',
-      pars: [],
-      getstart: 0,
-      ip: "127.0.0.1"
-    });
-    return up2;
+  private static _masterInstance: UpInfo =this.getGuest() ;
+
+  static setMaster(up: UpInfo): void {
+    this._masterInstance = up;
+  }
+
+  static getMaster(): UpInfo { 
+    return this._masterInstance;
   };
 
   static getGuest(): UpInfo {
