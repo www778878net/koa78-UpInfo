@@ -16,6 +16,14 @@ if (currentBranch === 'develop') {
     console.log('Merge to main completed successfully');
 } else if (currentBranch === 'main') {
     console.log('Current branch is main. Running npm version patch...');
+    console.log('运行测试...');
+    const testResult = shell.exec('npm test');
+    
+    if (testResult.code !== 0) {
+        console.error('测试失败，推送已中止');
+        shell.exit(1);
+    }
+    console.log('测试通过成功');
     const versionResult = shell.exec('npm run dev');
 
     if (versionResult.code !== 0) {
