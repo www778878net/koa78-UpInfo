@@ -198,6 +198,7 @@ export default class UpInfo {
   }
 
   static getMaster(): UpInfo {
+    this._masterInstance.pars = [];
     return this._masterInstance;
   };
 
