@@ -8,7 +8,7 @@ export default class UpInfo {
   bcid: string = "";
   mid: string = "";
   pars: string[] = [];
-  cols: string[] = [];
+  cols: string[] = ["all"];
 
   midpk: number = 0;
   upid: number = 0;
